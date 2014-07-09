@@ -7,12 +7,12 @@
 #   HUBOT_VC_SHARE_TOKEN
 #
 # Commands:
-#   hubot share <top-queries|query-compare|top-processes> last <count> <seconds|minutes|hours|days|month> - Generate a capture of the specified component
-#   share top-queries last minute|hour|month
-#   share top-queries last N seconds|minutes|hours|months
-#   share top-queries last 10 minutes
-#   share top-queries last 20 days
-#   share top-queries last 3 months
+#   hubot vividcortex|vc <top-queries|query-compare|top-processes> last <count> <seconds|minutes|hours|days|month> - Generate a capture of the specified component
+#   vividcortex top-queries last minute|hour|month
+#   vc query-compare last N seconds
+#   vc top-processes last 10 minutes
+#   vc top-queries last 20 days
+#   vc share top-queries last 3 months
 #
 # Notes:
 #   - Does not support graphs at the moment
@@ -99,7 +99,7 @@ module.exports = (robot) ->
 
   # Respond callback
 
-  robot.respond /vividcortex (.+)/i, (msg) ->
+  robot.respond /(vividcortex|vc) (.+)/i, (msg) ->
 
     commandArray = msg.match[1].replace(/^\s+|\s+$/g, "").split(/\s+/)
 

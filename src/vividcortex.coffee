@@ -2,17 +2,17 @@
 #   Renders VividCortex components as images
 #
 # Configuration:
-#   HUBOT_VC_ORGANIZATION
-#   HUBOT_VC_ENVIRONMENT
-#   HUBOT_VC_TOKEN
+#   HUBOT_VC_ORGANIZATION # This is the organization nickname, you'll see it in the VividCortex app URL
+#   HUBOT_VC_ENVIRONMENT # This is the environment ID, you'll see it in the VividCortex app URL too
+#   HUBOT_VC_TOKEN # This is the same token used to install VividCortex
 #
 # Commands:
-#   hubot vividcortex|vc <top-queries|query-compare|top-processes> last <count> <seconds|minutes|hours|days|month> - Generate a capture of the specified component
-#   vividcortex top-queries last minute|hour|month
-#   vc query-compare last N seconds
-#   vc top-processes last 10 minutes
-#   vc top-queries last 20 days
-#   vc share top-queries last 3 months
+#   hubot <vividcortex|vc> <top-queries|query-compare|top-processes> last <count> <seconds|minutes|hours|days|month> - Generate a capture of the specified component
+#   hubot <vividcortex|vc> <top-queries|query-compare|top-processes> last minute|hour|month
+#   hubot <vividcortex|vc> query-compare last N seconds
+#   hubot <vividcortex|vc> top-processes last 10 minutes
+#   hubot <vividcortex|vc> top-queries last 20 days
+#   hubot <vividcortex|vc> share top-queries last 3 months
 #
 # Notes:
 #   - Does not support graphs at the moment
@@ -27,9 +27,9 @@ api = "https://app.vividcortex.com/api/v2"
 
 # Config
 
-ORGANIZATION = process.env.HUBOT_VC_ORGANIZATION # This is the organization nickname, you'll see it in the VividCortex app URL
-ENVIRONMENT = process.env.HUBOT_VC_ENVIRONMENT # This is the environment ID, you'll see it in the VividCortex app URL too
-TOKEN = process.env.HUBOT_VC_TOKEN # This is the same token used to install VividCortex
+ORGANIZATION = process.env.HUBOT_VC_ORGANIZATION
+ENVIRONMENT = process.env.HUBOT_VC_ENVIRONMENT
+TOKEN = process.env.HUBOT_VC_TOKEN
 
 module.exports = (robot) ->
 
@@ -68,12 +68,12 @@ module.exports = (robot) ->
     from = 0
     till = 0
 
-    switch unit
-      when "seconds", "second" then from = 1
-      when "minutes", "minute" then from = 60
-      when "hours", "hour" then from  = 3600
-      when "days", "day" then from  = 3600 * 24
-      when "months", "month" then from  = 3600 * 24 * 30
+    from = switch unit
+      when "seconds", "second" then 1
+      when "minutes", "minute" then 60
+      when "hours", "hour" then 3600
+      when "days", "day" then 3600 * 24
+      when "months", "month" then 3600 * 24 * 30
       else from = 3600
 
     range =  "&from=" + (-from * count) + "&until=" + till

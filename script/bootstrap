@@ -4,7 +4,12 @@
 export NODE_ENV=development
 
 # Load environment specific environment variables
-if [ -f .env ]; then 
+
+#export HUBOT_VC_SHARE_ORGANIZATION=First segment of your VividCortex URL
+#export HUBOT_VC_SHARE_ENVIRONMENT=Second segment of your VividCortex URL
+#export HUBOT_VC_SHARE_TOKEN=Your VividCortex installation token
+
+if [ -f .env ]; then
   source .env
 fi
 

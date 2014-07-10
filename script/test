@@ -3,4 +3,11 @@
 # bootstrap environment
 source script/bootstrap
 
+
+#overwrite env vars for testing
+
+export HUBOT_VC_SHARE_ORGANIZATION=TestOrganization
+export HUBOT_VC_SHARE_ENVIRONMENT=TestEnvironment
+export HUBOT_VC_SHARE_TOKEN=TestToken
+
 mocha --compilers coffee:coffee-script  

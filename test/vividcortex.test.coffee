@@ -13,4 +13,4 @@ describe 'vividcortex', ->
     require('../src/vividcortex')(@robot)
 
   it 'Registers vividcortex respond listener', ->
-    expect(@robot.respond).to.have.been.calledWith(/vividcortex (.+)/i)
+    expect(@robot.respond).to.have.been.calledWith(/(vividcortex|vc) (.+)/i)

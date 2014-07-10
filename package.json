@@ -1,39 +1,32 @@
 {
   "name": "hubot-vividcortex",
   "description": "Vividcortex script for Hubot",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Cesar Varela <cesar@vividcortex.com>",
   "license": "MIT",
-
   "keywords": [
     "hubot",
     "hubot-scripts",
     "hubot-vividcortex",
     "vividcortex"
   ],
-
   "repository": {
     "type": "git",
     "url": "git://github.com/VividCortex/hubot-vividcortex.git"
   },
-
   "bugs": {
     "url": "https://github.com/VividCortex/hubot-vividcortex/issues"
   },
-
   "dependencies": {
     "coffee-script": "~1.6"
   },
-
   "devDependencies": {
     "mocha": "*",
     "chai": "*",
     "sinon-chai": "*",
     "sinon": "*"
   },
-
   "main": "index.coffee",
-
   "scripts": {
     "test": "script/test"
   }

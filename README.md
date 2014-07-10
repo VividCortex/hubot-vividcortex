@@ -6,12 +6,8 @@ Vividcortex integration for Hubot
 
 Add **hubot-vividcortex** to your `package.json` file:
 
-```json
-"dependencies": {
-  "hubot": ">= 2.6.0 < 3.0.0",
-  "hubot-scripts": ">= 2.5.0 < 3.0.0",
-  "hubot-vividcortex": ">= 0.0.1"
-}
+```
+npm install hubot-vividcortex --save
 ```
 Add **hubot-vividcortex** to your `external-scripts.json`:
 

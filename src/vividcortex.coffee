@@ -2,9 +2,9 @@
 #   Renders VividCortex components as images
 #
 # Configuration:
-#   HUBOT_VC_SHARE_ORGANIZATION
-#   HUBOT_VC_SHARE_ENVIRONMENT
-#   HUBOT_VC_SHARE_TOKEN
+#   HUBOT_VC_ORGANIZATION
+#   HUBOT_VC_ENVIRONMENT
+#   HUBOT_VC_TOKEN
 #
 # Commands:
 #   hubot vividcortex|vc <top-queries|query-compare|top-processes> last <count> <seconds|minutes|hours|days|month> - Generate a capture of the specified component
@@ -27,24 +27,28 @@ api = "https://app.vividcortex.com/api/v2"
 
 # Config
 
-ORGANIZATION = process.env.HUBOT_VC_SHARE_ORGANIZATION # This is the organization nickname, you'll see it in the VividCortex app URL
-ENVIRONMENT = process.env.HUBOT_VC_SHARE_ENVIRONMENT # This is the environment ID, you'll see it in the VividCortex app URL too
-TOKEN = process.env.HUBOT_VC_SHARE_TOKEN # This is the same token used to install VividCortex
-
-unless ORGANIZATION?
-  console.log "Missing HUBOT_VC_SHARE_ORGANIZATION in environment: please set and try again"
-  process.exit(1)
-
-unless ENVIRONMENT?
-  console.log "Missing HUBOT_VC_SHARE_ENVIRONMENT in environment: please set and try again"
-  process.exit(1)
-
-unless TOKEN?
-  console.log "Missing HUBOT_VC_SHARE_TOKEN in environment: please set and try again"
-  process.exit(1)
-
+ORGANIZATION = process.env.HUBOT_VC_ORGANIZATION # This is the organization nickname, you'll see it in the VividCortex app URL
+ENVIRONMENT = process.env.HUBOT_VC_ENVIRONMENT # This is the environment ID, you'll see it in the VividCortex app URL too
+TOKEN = process.env.HUBOT_VC_TOKEN # This is the same token used to install VividCortex
 
 module.exports = (robot) ->
+
+
+  environmentIsOk = (msg) ->
+
+    unless ORGANIZATION?
+      msg.send "Missing HUBOT_VC_ORGANIZATION in environment: please set and try again"
+      return false
+
+    unless ENVIRONMENT?
+      msg.send "Missing HUBOT_VC_ENVIRONMENT in environment: please set and try again"
+      return false
+
+    unless TOKEN?
+      msg.send "Missing HUBOT_VC_TOKEN in environment: please set and try again"
+      return false
+
+    return true # thanks coffeescript, but I like my returns
 
   urls =
 
@@ -101,7 +105,10 @@ module.exports = (robot) ->
 
   robot.respond /(vividcortex|vc) (.+)/i, (msg) ->
 
-    commandArray = msg.match[1].replace(/^\s+|\s+$/g, "").split(/\s+/)
+    unless environmentIsOk msg
+      return
+
+    commandArray = msg.match[2].replace(/^\s+|\s+$/g, "").split(/\s+/)
 
     component = commandArray[0]
     since = commandArray[1]
